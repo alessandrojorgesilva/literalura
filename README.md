@@ -50,6 +50,8 @@ Você pode [acessar o código fonte do projeto](https://github.com/alessandrojor
 ## Técnicas e tecnologias utilizadas
 
 - **Java 17**
+- **Spring Boot**
+- **Maven**
 - **InteliJ IDEA**
 - **Paradigma de orientação a objetos**
 - **PostgreSQL**
