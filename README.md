@@ -62,7 +62,8 @@ Você pode [acessar o código fonte do projeto](https://github.com/alessandrojor
    ```https://github.com/alessandrojorgesilva/literalura.git```.
 3. [Acesse o site da API gutendex](https://gutendex.com/).
 4. **Instalar o banco de dados PostgreSQL.**
-5. **Cria as variavéis de ambiente: DB_HOST, DB_NAMES, DB_USER e DB_PASSWORD no arquvo application.properties (configuração de acesso ao banco de dados)**
+5. **Criar um database chamado literalura**
+6. **Cria as variavéis de ambiente: DB_HOST, DB_NAMES, DB_USER e DB_PASSWORD no arquvo application.properties (configuração de acesso ao banco de dados)**
 
 
 ## 📜 Licença
