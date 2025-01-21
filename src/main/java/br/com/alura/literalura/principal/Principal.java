@@ -6,7 +6,9 @@ import br.com.alura.literalura.repository.AutorRepository;
 import br.com.alura.literalura.repository.LivroRepository;
 import br.com.alura.literalura.service.ConsumoApi;
 import br.com.alura.literalura.service.ConverterDados;
+import br.com.alura.literalura.util.ValidaNumero;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -36,10 +38,11 @@ public class Principal {
 
     public void exibirMenu() {
 
-        var opcao = -1;
+        var opcao = "-1";
 
-        while(opcao != 0){
-            var menu = """                
+        while(!opcao.equals("0")){
+            var menu = """ 
+                               
                 1-  Buscar livro pelo titulo
                 2-  Listar livros registrados
                 3-  Listar autores registrados
@@ -51,32 +54,38 @@ public class Principal {
                 """;
 
             System.out.println(menu);
-            opcao= leitura.nextInt();
-            leitura.nextLine();
+            opcao= leitura.nextLine();
+
+
+            while(!ValidaNumero.isNumero(String.valueOf(opcao))){
+                System.out.println("Escolha uma opção válida (0 a 5):");
+                opcao = leitura.nextLine();
+            }
 
             switch (opcao) {
-                case 1:
+                case "1":
                     buscarLivroPorTitulo();
                     break;
-                case 2:
+                case "2":
                     listarLivrosRegistrados();
                     break;
-                case 3:
+                case "3":
                     listarAutoresRegistrados();
                     break;
-                case 4:
+                case "4":
                     BuscarAutoresVivos();
 
                     break;
-                case 5:
+                case "5":
                     buscarLivroPorIdioma();
                     break;
                 default:
-                    System.out.println("Opção inválida");
+                    System.out.println("Escolha uma opção válida (0 a 5):");
             }
         }
     }
 
+    @Transactional
     private void buscarLivroPorTitulo() {
         Livro livro = null;
         Autor autor;
@@ -123,9 +132,12 @@ public class Principal {
             }
         }else {
             System.out.println("Nenhum livro encontrado. Verifique se digitou o nome correto!");
+
         }
 
+        if(livro != null){
         System.out.println(livro);
+        }
     }
 
     private void listarLivrosRegistrados() {
@@ -140,7 +152,7 @@ public class Principal {
 
     private void BuscarAutoresVivos() {
         System.out.println("Informe o ano que deseja consultar:");
-        var ano = leitura.nextInt();
+        var ano = leitura.nextLine();
         List<Autor> autores = autorRepository.AutoresVivosEmUmAno(ano);
         if(!autores.isEmpty()){
             autores.stream().forEach(System.out::println);
@@ -171,7 +183,6 @@ public class Principal {
             System.out.println("Não existem livros nesse idiona no banco de dados");
         }
 
-
-
     }
 }
+

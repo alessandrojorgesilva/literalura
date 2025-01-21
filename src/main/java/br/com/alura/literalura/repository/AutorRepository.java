@@ -12,6 +12,6 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
     Optional<Autor> findByNomeAndAnoNascimentoAndAnoFalecimento(String nome, Long anoNascimento, Long anoFalescimento);
 
     @Query("SELECT autor From Autor autor where :ano >= autor.anoNascimento AND :ano <= autor.anoFalecimento")
-    List<Autor> AutoresVivosEmUmAno(int ano);
+    List<Autor> AutoresVivosEmUmAno(String ano);
 
 }
